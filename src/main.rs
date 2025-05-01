@@ -27,6 +27,12 @@ fn main() {
         panic!("error")
     };
 
+    println!("zip file created");
+
+    // let path = std::path::Path::new(dir_name);
+    let file = std::fs::File::open(key_name).unwrap();
+    let mut archive = zip::ZipArchive::new(file).unwrap();
+    archive.extract(dir_name).unwrap();
 }
 
 fn write_file(file_name: &str, zip: Arc<Mutex<zip::ZipWriter<File>>>) {
